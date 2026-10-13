@@ -35,3 +35,7 @@ SELECT
         FROM valores
         WHERE x = 2
     ) AS not_exists_result;
+
+/*
+Corrección: Según la clave pude notar que solo ACCT-3002 está activa y sin eventos, y que cuatro cuentas no tienen DEPOSIT: ACCT-1001, ACCT-1002, ACCT-2001 y ACCT-3002. No es lo mismo. NOT IN con un NULL da UNKNOWN; NOT EXISTS solo pregunta si existe x=2 y devuelve TRUE si no está.
+*/
