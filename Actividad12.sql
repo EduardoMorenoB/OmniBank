@@ -18,3 +18,7 @@ WHERE NOT EXISTS (
   SELECT 1 FROM core.transactions t WHERE t.account_id=a.account_id
 )
 ORDER BY a.account_number;
+
+/*
+Corrección: Según la clave pude notar que la subconsulta tiene que correlacionar por account_id; si no, el movimiento se compara contra el promedio de todo el banco. Un movimiento supera el promedio de su cuenta. ACCT-1002 y ACCT-3002 no tienen movimientos, aunque solo una está activa. Uso NOT EXISTS y no NOT IN, porque un NULL puede quitar filas que sí deberían salir.
+*/
