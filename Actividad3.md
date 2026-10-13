@@ -254,3 +254,97 @@ Después de aplicar 1NF, 2NF y 3NF, el prototipo monolítico se divide en cuatro
 `sucursal_direccion`
 
 Con esta estructura se evita repetir los datos del cliente y de las sucursales en cada transacción, se reducen las anomalías de actualización y se conserva la integridad de las relaciones mediante llaves primarias y foráneas.
+
+## Correccion.
+
+Pude notar que separé bien los datos que estaban combinados en una misma columna y que identifiqué las tablas necesarias para normalizar la información, pero observé que no había diferenciado completamente las dependencias parciales de las dependencias transitivas. Al revisar mi actividad, comprendí que una tabla con una llave primaria de una sola columna puede cumplir con 2NF y aun así presentar problemas que deben resolverse en 3NF sin repeticiones innecesarias.
+
+### Paso 1. Primera Forma Normal (1NF)
+
+Se separan los campos que contienen varios datos:
+
+- `cliente_nombre_y_contacto` → `nombre`, `email`, `telefono`.
+- `moneda_y_tipo` → `moneda`, `tipo_cuenta`.
+
+La tabla resultante contiene:
+
+- transaccion_id
+- fecha_tx
+- cliente_id
+- nombre
+- email
+- telefono
+- cuenta_numero
+- moneda
+- tipo_cuenta
+- saldo_actual
+- monto_tx
+- sucursal_id
+- direccion
+
+### Paso 2. Segunda Forma Normal (2NF)
+
+La tabla cumple con 2NF porque su llave primaria `transaccion_id` está formada por una sola columna y no existen dependencias parciales.
+
+Sin embargo, todavía contiene datos repetidos y dependencias transitivas que deben resolverse en 3NF.
+
+### Paso 3. Tercera Forma Normal (3NF)
+
+Se separan los datos en cuatro tablas para eliminar las dependencias transitivas y evitar información repetida.
+
+#### 1. CLIENTES
+
+| Columna | Llave |
+|---|---|
+| cliente_id | PK / TaxID |
+| nombre | |
+| email | |
+| telefono | |
+
+#### 2. SUCURSALES
+
+| Columna | Llave |
+|---|---|
+| sucursal_id | PK |
+| direccion | |
+
+#### 3. CUENTAS
+
+| Columna | Llave |
+|---|---|
+| cuenta_numero | PK |
+| cliente_id | FK → Clientes |
+| sucursal_id | FK → Sucursales |
+| moneda | |
+| tipo_cuenta | |
+| saldo_actual | |
+
+#### 4. TRANSACCIONES
+
+| Columna | Llave |
+|---|---|
+| transaccion_id | PK |
+| cuenta_numero | FK → Cuentas |
+| fecha_tx | |
+| monto_tx | |
+
+### Relaciones y cardinalidad
+
+CLIENTES |------------< CUENTAS
+
+SUCURSALES |------------< CUENTAS
+
+CUENTAS |------------< TRANSACCIONES
+
+### Resultado
+
+El prototipo monolítico queda dividido en cuatro tablas:
+
+- CLIENTES
+- CUENTAS
+- SUCURSALES
+- TRANSACCIONES
+
+Cada tabla almacena los atributos correspondientes a su entidad, evitando repetir los datos de clientes y sucursales en cada transacción.
+
+Las relaciones se mantienen mediante llaves primarias y foráneas, cumpliendo con la estructura en Tercera Forma Normal solicitada en la actividad.
