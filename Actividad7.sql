@@ -65,3 +65,15 @@ WHERE a.account_id = fee.account_id
 RETURNING a.account_number, a.balance;
 
 COMMIT;
+
+/*
+Pude notar que había realizado correctamente la inserción de los
+clientes, las cuentas y las transacciones iniciales, utilizando
+ON CONFLICT para evitar registros duplicados. Después de revisar
+mi actividad, observé que podía mejorar la organización del código
+y mantener una relación directa entre la inserción de la comisión
+y la actualización del saldo mediante RETURNING. También comprendí
+que esta estructura permite descontar los 50.00 únicamente cuando
+se registra una nueva comisión, evitando que el saldo vuelva a
+disminuir al ejecutar el archivo nuevamente.
+*/
