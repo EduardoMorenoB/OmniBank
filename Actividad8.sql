@@ -33,3 +33,15 @@ SELECT
 FROM core.transactions
 WHERE description IS NULL
   AND tx_type = 'WITHDRAWAL';
+
+
+/*
+Pude notar que había utilizado correctamente SELECT con columnas
+específicas, ORDER BY, LIMIT, ILIKE, IS NULL y COALESCE, pero
+observé que en el segundo punto me faltaba incluir el símbolo @
+en el patrón del correo electrónico. También identifiqué que
+en el tercer punto había omitido las columnas account_id y amount.
+Después de revisar mi actividad, comprendí la importancia de
+seleccionar todas las columnas solicitadas y definir correctamente
+los filtros para obtener resultados más precisos.
+*/

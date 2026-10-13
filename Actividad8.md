@@ -20,3 +20,13 @@
 | ID de cuenta | Monto | Tipo | Descripción |
 |---|---:|---|---|
 | UUID de la cuenta correspondiente | Monto de la transacción | WITHDRAWAL | COBRO INSTITUCIONAL O COMISIÓN - SIN RECEPTOR |
+
+## Corrección
+Pude notar que los resultados de los primeros dos reportes
+estaban organizados correctamente, pero observé que en el
+tercer punto había omitido el identificador de la cuenta
+y el monto de la transacción. Después de revisar mi actividad,
+comprendí que el reporte debe mostrar todas las columnas
+solicitadas para identificar correctamente los movimientos
+que tienen una descripción NULL.
+-->
