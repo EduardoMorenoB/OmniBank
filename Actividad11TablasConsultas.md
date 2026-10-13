@@ -28,3 +28,5 @@ Cálculo manual de fecha de revisión: `2026-09-01 10:00+00` + 15 días = `2026-
 | `10000000-0000-0000-0000-000000000004` | `cccccccc-cccc-cccc-cccc-cccccccccccc` | `2026-09-04 10:00:00+00` | 300.00 | `2026-09-19 10:00:00+00` |
 
 El reporte contiene cuatro movimientos. Estas filas muestran la marca original y la fecha derivada. Para completar el contrato de la consulta, todavía deben proyectarse el año y mes extraídos, la antigüedad calculada con el corte fijo y el importe transformado para presentación.
+
+Corrección: Según la clave pude notar que faltaban el año, el mes, la antigüedad contra el corte fijo 2026-10-01 y el importe como numeric. Las revisiones caen del 16 al 19 de septiembre. No uso CURRENT_DATE porque el resultado dejaría de ser el mismo cada día.
