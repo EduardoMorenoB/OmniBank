@@ -38,3 +38,16 @@ RELACIONES:
 
 [Cuentas] 1 ---------------- N [Transacciones]
            (Cuenta de destino)
+
+
+### Correcciones y aprendizajes
+Pude notar que identifiqué correctamente las entidades,
+sus relaciones y el uso de UUID en las llaves primarias
+y foráneas, pero olvidé agregar algunos atributos como
+telefono, fecha_nacimiento y tax_id con su restricción
+UNIQUE. También aprendí que deleted_at es una forma
+válida de implementar la baja lógica y que updated_at
+permite registrar la última modificación de una cuenta.
+Comprendí que cada transacción debe relacionarse con
+una cuenta de origen y otra de destino mediante
+llaves foráneas UUID.
